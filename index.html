@@ -543,7 +543,7 @@ hexo.on('new', (data) => {
       
         
           
-            <p>老板最近抱怨上不去Google、YouTube啊（她是MAC用户），然后偶然间听我说我用着北京实验室的代理畅通无阻，就给我下达了立即购买部署的任务。情急之下，我请教了去年在北京学习时认识的最牛逼的师兄————Kevinzjy，我亲爱的无所不知无所不能的酱哥，原谅我就是这样一个酱吹。然后在他的帮助下，搞定了这个小任务。</p>
+            <p>老板最近抱怨上不去Google、YouTube啊（她是MAC用户），然后偶然间听我说我用着北京实验室的代理畅通无阻，就给我下达了立即购买部署的任务。情急之下，我请教了去年在北京学习时认识的最牛逼的师兄————<strong>Kevinzjy</strong>，我亲爱的无所不知无所不能的酱哥，原谅我就是这样一个酱吹。然后在他的帮助下，搞定了这个小任务。</p>
 <p>以下为基本操作，大多依照酱哥的protocol，稍有变化改动。原文链接：<a href="https://kevinzjy.github.io/2017/11/05/Ubuntu-shadowsocks/" target="_blank" rel="noopener">https://kevinzjy.github.io/2017/11/05/Ubuntu-shadowsocks/</a></p>
 <p>选用DigitalOcean上的VPS</p>
 <p>至于原因嘛，酱哥聊天先发了这个…</p>
@@ -555,15 +555,8 @@ Size: 1GB/1CPU
 Region: NYC3
 </code></pre><h1 id="Step1-建立Server"><a href="#Step1-建立Server" class="headerlink" title="Step1: 建立Server"></a>Step1: 建立Server</h1><p>在DigitalOcean上面新建一个Droplet，我选择的是美国纽约</p>
 <h1 id="Step2-登录VPS进行配置"><a href="#Step2-登录VPS进行配置" class="headerlink" title="Step2: 登录VPS进行配置"></a>Step2: 登录VPS进行配置</h1><p>默认下将IP地址root密码发送至邮箱<br>修改Root密码</p>
-<pre><code>ssh root@vps_ip # 登录VPS
-sudo passwd root #修改ROOT密码
-
-Enter new UNIX password: # 输入新密码
-
-Retype new UNIX password: # 再次输入
-
-passwd: password updated successfully
-</code></pre><p>修改时区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ssh root@vps_ip <span class="comment"># 登录VPS</span></span><br><span class="line">sudo passwd root <span class="comment">#修改ROOT密码</span></span><br><span class="line"></span><br><span class="line">Enter new UNIX password: <span class="comment"># 输入新密码</span></span><br><span class="line"></span><br><span class="line">Retype new UNIX password: <span class="comment"># 再次输入</span></span><br><span class="line"></span><br><span class="line">passwd: password updated successfully</span><br></pre></td></tr></table></figure>
+<p>修改时区</p>
 <pre><code>dpkg-reconfigure tzdata #修改时区，选择Asia/Shanghai
 Current default time zone: ‘Asia/Shanghai’
 
