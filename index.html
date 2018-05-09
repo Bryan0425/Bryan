@@ -547,19 +547,17 @@ hexo.on('new', (data) => {
 <p>以下为基本操作，大多依照酱哥的protocol，稍有变化改动。原文链接：<a href="https://kevinzjy.github.io/2017/11/05/Ubuntu-shadowsocks/" target="_blank" rel="noopener">https://kevinzjy.github.io/2017/11/05/Ubuntu-shadowsocks/</a></p>
 <p>选用DigitalOcean上的VPS</p>
 <p>至于原因嘛，酱哥聊天先发了这个…</p>
-<p>#VPS的系统配置</p>
-<pre><code>Image：Ubuntu 16.04.4 x64
+<h1 id="VPS的系统配置"><a href="#VPS的系统配置" class="headerlink" title="VPS的系统配置"></a>VPS的系统配置</h1><pre><code>Image：Ubuntu 16.04.4 x64
 Size: 1GB/1CPU
-    25GB SSD
-    1000 GB Transfer
-    $5/mo
+      25GB SSD
+      1000 GB Transfer
+      $5/mo
 Region: NYC3
-</code></pre><p>#Step1: 建立Server</p>
-<p>在DigitalOcean上面新建一个Droplet，我选择的是美国纽约</p>
-<p>#Step2: 登录VPS进行配置</p>
-<p>默认下将IP地址root密码发送至邮箱<br>修改Root密码</p>
+</code></pre><h1 id="Step1-建立Server"><a href="#Step1-建立Server" class="headerlink" title="Step1: 建立Server"></a>Step1: 建立Server</h1><p>在DigitalOcean上面新建一个Droplet，我选择的是美国纽约</p>
+<h1 id="Step2-登录VPS进行配置"><a href="#Step2-登录VPS进行配置" class="headerlink" title="Step2: 登录VPS进行配置"></a>Step2: 登录VPS进行配置</h1><p>默认下将IP地址root密码发送至邮箱<br>修改Root密码</p>
 <pre><code>ssh root@vps_ip # 登录VPS
 sudo passwd root #修改ROOT密码
+
 Enter new UNIX password: # 输入新密码
 
 Retype new UNIX password: # 再次输入
@@ -576,12 +574,12 @@ Universal Time is now: Fri May 7 07:19:57 UTC 2018.
 <pre><code>apt update # 更新apt源
 apt upgrade # 升级
 </code></pre><p>推荐新建一个具有Root权限的用户，方便VPS的管理和操作</p>
-<p>sudo adduser panb # 新建用户</p>
-<pre><code># 在 /etc/sudoers 中添加root权限
+<pre><code>sudo adduser panb # 新建用户
+# 在 /etc/sudoers 中添加root权限
 # User privilege specification
-</code></pre><p>panb ALL=(ALL) ALL<br>下面的操作可以退出后使用新建的账户进行操作</p>
-<p>#Step3: 安装Shadowsocks服务</p>
-<p>DigitalOcean上的VPS最大的作用就是可以同时连接ipv4和ipv6服务，在搭建Shadowsocks服务后，可以在校园网下用IPV6代理实现直接访问IPV4网址，不需要登录网关，同时避开了流量计费系统。</p>
+panb ALL=(ALL) ALL
+</code></pre><p>下面的操作可以退出后使用新建的账户进行操作</p>
+<h1 id="Step3-安装Shadowsocks服务"><a href="#Step3-安装Shadowsocks服务" class="headerlink" title="Step3: 安装Shadowsocks服务"></a>Step3: 安装Shadowsocks服务</h1><p>DigitalOcean上的VPS最大的作用就是可以同时连接ipv4和ipv6服务，在搭建Shadowsocks服务后，可以在校园网下用IPV6代理实现直接访问IPV4网址，不需要登录网关，同时避开了流量计费系统。</p>
 <pre><code>sudo apt install python-pip
 sudo pip install --upgrade pip
 sudo pip install setuptools
@@ -600,8 +598,7 @@ sudo pip install shadowsocks
 <p>现在，可以手动开启shadowsocks服务了</p>
 <pre><code>ssserver -c /etc/shadowsocks.json -d start 
 </code></pre><p>以后的重启就是-d restart</p>
-<p>#Step4: 配置shadowsocks服务开机自动启动</p>
-<p>据酱哥说一直不成功哈哈哈~</p>
+<h1 id="Step4-配置shadowsocks服务开机自动启动"><a href="#Step4-配置shadowsocks服务开机自动启动" class="headerlink" title="Step4: 配置shadowsocks服务开机自动启动"></a>Step4: 配置shadowsocks服务开机自动启动</h1><p>据酱哥说一直不成功哈哈哈~</p>
 <p>创建脚本 /etc/init.d/shadowsocks</p>
 <pre><code>#!/bin/sh
 ### BEGIN INIT INFO
@@ -642,8 +639,7 @@ esac
 sudo update-rc.d shadowsocks defaults
 </code></pre><p>手动开启shadowsocks服务</p>
 <pre><code>sudo service shadowsocks start
-</code></pre><p>#Step5: shadowsocks自动重连</p>
-<p>创建autostart.sh</p>
+</code></pre><h1 id="Step5-shadowsocks自动重连"><a href="#Step5-shadowsocks自动重连" class="headerlink" title="Step5: shadowsocks自动重连"></a>Step5: shadowsocks自动重连</h1><p>创建autostart.sh</p>
 <pre><code>#!/bin/bash
 pids=&quot;$($_CMD pgrep ssserver)&quot;
 if [ ! $pids ]; then
