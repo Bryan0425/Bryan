@@ -555,102 +555,52 @@ Size: 1GB/1CPU
 Region: NYC3
 </code></pre><h1 id="Step1-建立Server"><a href="#Step1-建立Server" class="headerlink" title="Step1: 建立Server"></a>Step1: 建立Server</h1><p>在DigitalOcean上面新建一个Droplet，我选择的是美国纽约</p>
 <h1 id="Step2-登录VPS进行配置"><a href="#Step2-登录VPS进行配置" class="headerlink" title="Step2: 登录VPS进行配置"></a>Step2: 登录VPS进行配置</h1><p>默认下将IP地址root密码发送至邮箱<br>修改Root密码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ssh root@vps_ip <span class="comment"># 登录VPS</span></span><br><span class="line">sudo passwd root <span class="comment">#修改ROOT密码</span></span><br><span class="line"></span><br><span class="line">Enter new UNIX password: <span class="comment"># 输入新密码</span></span><br><span class="line"></span><br><span class="line">Retype new UNIX password: <span class="comment"># 再次输入</span></span><br><span class="line"></span><br><span class="line">passwd: password updated successfully</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh root@vps_ip <span class="comment"># 登录VPS</span></span><br><span class="line">sudo passwd root <span class="comment">#修改ROOT密码</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Enter new UNIX password: # 输入新密码    </p>
+</blockquote>
+<blockquote>
+<p>Retype new UNIX password: # 再次输入   </p>
+</blockquote>
+<blockquote>
+<p>passwd: password updated successfully</p>
+</blockquote>
 <p>修改时区</p>
 <pre><code>dpkg-reconfigure tzdata #修改时区，选择Asia/Shanghai
-Current default time zone: ‘Asia/Shanghai’
+Current default time zone: &apos;Asia/Shanghai&apos;
 
 Local time is now: Fri May 7 15:19:57 CST 2018.
 
 Universal Time is now: Fri May 7 07:19:57 UTC 2018.
 </code></pre><p>更新APT源</p>
-<pre><code>apt update # 更新apt源
-apt upgrade # 升级
-</code></pre><p>推荐新建一个具有Root权限的用户，方便VPS的管理和操作</p>
-<pre><code>sudo adduser panb # 新建用户
-# 在 /etc/sudoers 中添加root权限
-# User privilege specification
-panb ALL=(ALL) ALL
-</code></pre><p>下面的操作可以退出后使用新建的账户进行操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update <span class="comment"># 更新apt源</span></span><br><span class="line">apt upgrade <span class="comment"># 升级</span></span><br></pre></td></tr></table></figure>
+<p>推荐新建一个具有Root权限的用户，方便VPS的管理和操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser panb <span class="comment"># 新建用户</span></span><br><span class="line"><span class="comment"># 在 /etc/sudoers 中添加root权限</span></span><br><span class="line"><span class="comment"># User privilege specification</span></span><br><span class="line">panb ALL=(ALL) ALL</span><br></pre></td></tr></table></figure>
+<p>下面的操作可以退出后使用新建的账户进行操作</p>
 <h1 id="Step3-安装Shadowsocks服务"><a href="#Step3-安装Shadowsocks服务" class="headerlink" title="Step3: 安装Shadowsocks服务"></a>Step3: 安装Shadowsocks服务</h1><p>DigitalOcean上的VPS最大的作用就是可以同时连接ipv4和ipv6服务，在搭建Shadowsocks服务后，可以在校园网下用IPV6代理实现直接访问IPV4网址，不需要登录网关，同时避开了流量计费系统。</p>
-<pre><code>sudo apt install python-pip
-sudo pip install --upgrade pip
-sudo pip install setuptools
-sudo pip install shadowsocks
-</code></pre><p>特别注意的是，有的服务器自带setuptools ，卸载之后重装就好了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python-pip</span><br><span class="line">sudo pip install --upgrade pip</span><br><span class="line">sudo pip install setuptools</span><br><span class="line">sudo pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<p>特别注意的是，有的服务器自带setuptools ，<strong>卸载</strong>之后重装就好了。</p>
 <p>编辑vim /etc/shadowsocks.json，添加如下内容</p>
-<pre><code>{
-    &quot;server&quot;: &quot;::&quot;, # 监听IPV6地址
-    &quot;server_port&quot;: 443, # 使用443端口，更加“安全”
-    &quot;local_port&quot;: 1080,
-    &quot;password&quot;: &quot;PASSWORD&quot;, # 密码
-    &quot;timeout&quot;: 600,
-    &quot;method&quot;: &quot;aes-256-cfb&quot;
-}
-</code></pre><p>注意：我的版本里运行时需删掉注释，否则不work。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"server"</span>: <span class="string">"::"</span>, <span class="comment"># 监听IPV6地址</span></span><br><span class="line">    <span class="string">"server_port"</span>: 443, <span class="comment"># 使用443端口，更加“安全”</span></span><br><span class="line">    <span class="string">"local_port"</span>: 1080,</span><br><span class="line">    <span class="string">"password"</span>: <span class="string">"PASSWORD"</span>, <span class="comment"># 密码</span></span><br><span class="line">    <span class="string">"timeout"</span>: 600,</span><br><span class="line">    <span class="string">"method"</span>: <span class="string">"aes-256-cfb"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：我的版本里运行时需 <strong>删掉注释</strong>，否则不work。</p>
 <p>现在，可以手动开启shadowsocks服务了</p>
-<pre><code>ssserver -c /etc/shadowsocks.json -d start 
-</code></pre><p>以后的重启就是-d restart</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json -d start</span><br></pre></td></tr></table></figure>
+<p>以后的重启就是-d restart</p>
 <h1 id="Step4-配置shadowsocks服务开机自动启动"><a href="#Step4-配置shadowsocks服务开机自动启动" class="headerlink" title="Step4: 配置shadowsocks服务开机自动启动"></a>Step4: 配置shadowsocks服务开机自动启动</h1><p>据酱哥说一直不成功哈哈哈~</p>
 <p>创建脚本 /etc/init.d/shadowsocks</p>
-<pre><code>#!/bin/sh
-### BEGIN INIT INFO
-# Provides:          shadowsocks
-# Required-Start:    $remote_fs $syslog
-# Required-Stop:     $remote_fs $syslog
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: start shadowsocks 
-# Description:       start shadowsocks
-### END INIT INFO
-ssstart(){
-    /usr/local/bin/ssserver -c /etc/shadowsocks.json -d start
-}
-ssstop(){
-    /usr/local/bin/ssserver-d stop
-}
-ssreload(){
-    /usr/local/bin/ssserver -c /etc/shadowsocks.json -d restart
-}
-case &quot;$1&quot; in
-start)
-    ssstart
-    ;;
-stop)
-    ssstop
-    ;;
-reload)
-    ssreload
-    ;;
-*)
-    echo &quot;Usage: $0 {start|reload|stop}&quot;
-    exit 1
-    ;;
-esac
-</code></pre><p>增加文件的执行权限，并加入rc.d中，实现开机启动</p>
-<pre><code>sudo chmod +x /etc/init.d/shadowsocks
-sudo update-rc.d shadowsocks defaults
-</code></pre><p>手动开启shadowsocks服务</p>
-<pre><code>sudo service shadowsocks start
-</code></pre><h1 id="Step5-shadowsocks自动重连"><a href="#Step5-shadowsocks自动重连" class="headerlink" title="Step5: shadowsocks自动重连"></a>Step5: shadowsocks自动重连</h1><p>创建autostart.sh</p>
-<pre><code>#!/bin/bash
-pids=&quot;$($_CMD pgrep ssserver)&quot;
-if [ ! $pids ]; then
-        /usr/local/bin/ssserver -c /etc/shadowsocks.json -d start &gt;&gt; /root/ss.log
-        newid=&quot;$($_CMD pgrep ssserver)&quot;
-        echo &quot;Shadowsocks restarted at pid: $newid&quot; &gt;&gt; /root/ss.log
-fi
-</code></pre><p>在crontab配置中，配置每天凌晨重启，以及每分钟检测断线重连</p>
-<pre><code>crontab -e 
-# 选择[3]: vim.basic
-# 最后加入
-0 4 * * * ssserver -c /etc/shadowsocks.json -d restart &gt;&gt; /root/ss.log
-*/1 * * * * /root/autostart.sh
-重启Crontab，使定时任务生效
-
-service cron reload
-</code></pre><p>大功告成！撒花！感谢酱哥的全程指导！</p>
-<p>泪流满面~小白入门太不容易啦！日后还要加油啊:)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">### BEGIN INIT INFO</span></span><br><span class="line"><span class="comment"># Provides:          shadowsocks</span></span><br><span class="line"><span class="comment"># Required-Start:    $remote_fs $syslog</span></span><br><span class="line"><span class="comment"># Required-Stop:     $remote_fs $syslog</span></span><br><span class="line"><span class="comment"># Default-Start:     2 3 4 5</span></span><br><span class="line"><span class="comment"># Default-Stop:      0 1 6</span></span><br><span class="line"><span class="comment"># Short-Description: start shadowsocks </span></span><br><span class="line"><span class="comment"># Description:       start shadowsocks</span></span><br><span class="line"><span class="comment">### END INIT INFO</span></span><br><span class="line"><span class="function"><span class="title">ssstart</span></span>()&#123;</span><br><span class="line">    /usr/<span class="built_in">local</span>/bin/ssserver -c /etc/shadowsocks.json -d start</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">ssstop</span></span>()&#123;</span><br><span class="line">    /usr/<span class="built_in">local</span>/bin/ssserver<span class="_">-d</span> stop</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">ssreload</span></span>()&#123;</span><br><span class="line">    /usr/<span class="built_in">local</span>/bin/ssserver -c /etc/shadowsocks.json -d restart</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">start)</span><br><span class="line">    ssstart</span><br><span class="line">    ;;</span><br><span class="line">stop)</span><br><span class="line">    ssstop</span><br><span class="line">    ;;</span><br><span class="line">reload)</span><br><span class="line">    ssreload</span><br><span class="line">    ;;</span><br><span class="line">*)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage: <span class="variable">$0</span> &#123;start|reload|stop&#125;"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>增加文件的执行权限，并加入rc.d中，实现开机启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /etc/init.d/shadowsocks</span><br><span class="line">sudo update-rc.d shadowsocks defaults</span><br></pre></td></tr></table></figure>
+<p>手动开启shadowsocks服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service shadowsocks start</span><br></pre></td></tr></table></figure>
+<h1 id="Step5-shadowsocks自动重连"><a href="#Step5-shadowsocks自动重连" class="headerlink" title="Step5: shadowsocks自动重连"></a>Step5: shadowsocks自动重连</h1><p>创建autostart.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">pids=<span class="string">"<span class="variable">$($_CMD pgrep ssserver)</span>"</span></span><br><span class="line"><span class="keyword">if</span> [ ! <span class="variable">$pids</span> ]; <span class="keyword">then</span></span><br><span class="line">        /usr/<span class="built_in">local</span>/bin/ssserver -c /etc/shadowsocks.json -d start &gt;&gt; /root/ss.log</span><br><span class="line">        newid=<span class="string">"<span class="variable">$($_CMD pgrep ssserver)</span>"</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Shadowsocks restarted at pid: <span class="variable">$newid</span>"</span> &gt;&gt; /root/ss.log</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>在crontab配置中，配置每天凌晨重启，以及每分钟检测断线重连</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">crontab -e </span><br><span class="line"><span class="comment"># 选择[3]: vim.basic</span></span><br><span class="line"><span class="comment"># 最后加入</span></span><br><span class="line">0 4 * * * ssserver -c /etc/shadowsocks.json -d restart &gt;&gt; /root/ss.log</span><br><span class="line">*/1 * * * * /root/autostart.sh</span><br></pre></td></tr></table></figure>
+<pre><code>重启Crontab，使定时任务生效
+</code></pre><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service cron reload</span><br></pre></td></tr></table></figure>
+<p>大功告成！撒花！感谢酱哥的全程指导！</p>
+<p>泪流满面~小白入门太不容易啦！日后还要加油啊:) :blush:</p>
 
           
         
