@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="学习体会," />
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="老板最近抱怨上不去Google、YouTube啊（她是MAC用户），然后偶然间听我说我用着北京实验室的代理畅通无阻，就给我下达了立即购买部署的任务。情急之下，我请教了去年在北京学习时认识的最牛逼的师兄————Kevinzjy，我亲爱的无所不知无所不能的酱哥，原谅我就是这样一个酱吹。然后在他的帮助下，搞定了这个小任务。 以下为基本操作，大多依照酱哥的protocol，稍有变化改动。原文链接：http">
+<meta name="keywords" content="学习体会">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu VPS上搭建Shadowsocks IPV6代理">
 <meta property="og:url" content="http://yoursite.com/2018/05/08/Ubuntu-VPS上搭建Shadowsocks-IPV6代理/index.html">
 <meta property="og:site_name" content="Bryan Pan&#39;s blog">
 <meta property="og:description" content="老板最近抱怨上不去Google、YouTube啊（她是MAC用户），然后偶然间听我说我用着北京实验室的代理畅通无阻，就给我下达了立即购买部署的任务。情急之下，我请教了去年在北京学习时认识的最牛逼的师兄————Kevinzjy，我亲爱的无所不知无所不能的酱哥，原谅我就是这样一个酱吹。然后在他的帮助下，搞定了这个小任务。 以下为基本操作，大多依照酱哥的protocol，稍有变化改动。原文链接：http">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-08T15:27:21.556Z">
+<meta property="og:updated_time" content="2018-05-09T01:48:39.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu VPS上搭建Shadowsocks IPV6代理">
 <meta name="twitter:description" content="老板最近抱怨上不去Google、YouTube啊（她是MAC用户），然后偶然间听我说我用着北京实验室的代理畅通无阻，就给我下达了立即购买部署的任务。情急之下，我请教了去年在北京学习时认识的最牛逼的师兄————Kevinzjy，我亲爱的无所不知无所不能的酱哥，原谅我就是这样一个酱吹。然后在他的帮助下，搞定了这个小任务。 以下为基本操作，大多依照酱哥的protocol，稍有变化改动。原文链接：http">
@@ -303,49 +304,120 @@
 <p>以下为基本操作，大多依照酱哥的protocol，稍有变化改动。原文链接：<a href="https://kevinzjy.github.io/2017/11/05/Ubuntu-shadowsocks/" target="_blank" rel="noopener">https://kevinzjy.github.io/2017/11/05/Ubuntu-shadowsocks/</a></p>
 <p>选用DigitalOcean上的VPS</p>
 <p>至于原因嘛，酱哥聊天先发了这个…</p>
-<p>VPS的系统配置</p>
-<p>Image：Ubuntu 16.04.4 x64<br>Size: 1GB/1CPU<br>      25GB SSD<br>      1000 GB Transfer<br>       $5/mo<br>Region: NYC3</p>
-<p>Step1: 建立Server</p>
+<p>#VPS的系统配置</p>
+<pre><code>Image：Ubuntu 16.04.4 x64
+Size: 1GB/1CPU
+    25GB SSD
+    1000 GB Transfer
+    $5/mo
+Region: NYC3
+</code></pre><p>#Step1: 建立Server</p>
 <p>在DigitalOcean上面新建一个Droplet，我选择的是美国纽约</p>
-<p>Step2: 登录VPS进行配置</p>
+<p>#Step2: 登录VPS进行配置</p>
 <p>默认下将IP地址root密码发送至邮箱<br>修改Root密码</p>
-<p>ssh root@vps_ip # 登录VPS<br>sudo passwd root #修改ROOT密码<br>Enter new UNIX password: # 输入新密码</p>
-<p>Retype new UNIX password: # 再次输入</p>
-<p>passwd: password updated successfully</p>
-<p>修改时区</p>
-<p>dpkg-reconfigure tzdata #修改时区，选择Asia/Shanghai<br>Current default time zone: ‘Asia/Shanghai’</p>
-<p>Local time is now: Fri May 7 15:19:57 CST 2018.</p>
-<p>Universal Time is now: Fri May 7 07:19:57 UTC 2018.</p>
-<p>更新APT源</p>
-<p>apt update # 更新apt源<br>apt upgrade # 升级<br>推荐新建一个具有Root权限的用户，方便VPS的管理和操作</p>
+<pre><code>ssh root@vps_ip # 登录VPS
+sudo passwd root #修改ROOT密码
+Enter new UNIX password: # 输入新密码
+
+Retype new UNIX password: # 再次输入
+
+passwd: password updated successfully
+</code></pre><p>修改时区</p>
+<pre><code>dpkg-reconfigure tzdata #修改时区，选择Asia/Shanghai
+Current default time zone: ‘Asia/Shanghai’
+
+Local time is now: Fri May 7 15:19:57 CST 2018.
+
+Universal Time is now: Fri May 7 07:19:57 UTC 2018.
+</code></pre><p>更新APT源</p>
+<pre><code>apt update # 更新apt源
+apt upgrade # 升级
+</code></pre><p>推荐新建一个具有Root权限的用户，方便VPS的管理和操作</p>
 <p>sudo adduser panb # 新建用户</p>
-<h1 id="在-etc-sudoers-中添加root权限"><a href="#在-etc-sudoers-中添加root权限" class="headerlink" title="在 /etc/sudoers 中添加root权限"></a>在 /etc/sudoers 中添加root权限</h1><h1 id="User-privilege-specification"><a href="#User-privilege-specification" class="headerlink" title="User privilege specification"></a>User privilege specification</h1><p>panb ALL=(ALL) ALL<br>下面的操作可以退出后使用新建的账户进行操作</p>
-<p>Step3: 安装Shadowsocks服务</p>
+<pre><code># 在 /etc/sudoers 中添加root权限
+# User privilege specification
+</code></pre><p>panb ALL=(ALL) ALL<br>下面的操作可以退出后使用新建的账户进行操作</p>
+<p>#Step3: 安装Shadowsocks服务</p>
 <p>DigitalOcean上的VPS最大的作用就是可以同时连接ipv4和ipv6服务，在搭建Shadowsocks服务后，可以在校园网下用IPV6代理实现直接访问IPV4网址，不需要登录网关，同时避开了流量计费系统。</p>
-<p>sudo apt install python-pip<br>sudo pip install –upgrade pip<br>sudo pip install setuptools<br>sudo pip install shadowsocks</p>
-<p>特别注意的是，有的服务器自带setuptools ，卸载之后重装就好了。</p>
+<pre><code>sudo apt install python-pip
+sudo pip install --upgrade pip
+sudo pip install setuptools
+sudo pip install shadowsocks
+</code></pre><p>特别注意的是，有的服务器自带setuptools ，卸载之后重装就好了。</p>
 <p>编辑vim /etc/shadowsocks.json，添加如下内容</p>
-<p>{<br>    “server”: “::”, # 监听IPV6地址<br>    “server_port”: 443, # 使用443端口，更加“安全”<br>    “local_port”: 1080,<br>    “password”: “PASSWORD”, # 密码<br>    “timeout”: 600,<br>    “method”: “aes-256-cfb”<br>}</p>
-<p>注意：我的版本里运行时需删掉注释，否则不work。</p>
+<pre><code>{
+    &quot;server&quot;: &quot;::&quot;, # 监听IPV6地址
+    &quot;server_port&quot;: 443, # 使用443端口，更加“安全”
+    &quot;local_port&quot;: 1080,
+    &quot;password&quot;: &quot;PASSWORD&quot;, # 密码
+    &quot;timeout&quot;: 600,
+    &quot;method&quot;: &quot;aes-256-cfb&quot;
+}
+</code></pre><p>注意：我的版本里运行时需删掉注释，否则不work。</p>
 <p>现在，可以手动开启shadowsocks服务了</p>
-<p>ssserver -c /etc/shadowsocks.json -d start<br>以后的重启就是-d restart</p>
-<p>Step4: 配置shadowsocks服务开机自动启动</p>
+<pre><code>ssserver -c /etc/shadowsocks.json -d start 
+</code></pre><p>以后的重启就是-d restart</p>
+<p>#Step4: 配置shadowsocks服务开机自动启动</p>
 <p>据酱哥说一直不成功哈哈哈~</p>
 <p>创建脚本 /etc/init.d/shadowsocks</p>
-<p>#!/bin/sh</p>
-<h3 id="BEGIN-INIT-INFO"><a href="#BEGIN-INIT-INFO" class="headerlink" title="BEGIN INIT INFO"></a>BEGIN INIT INFO</h3><h1 id="Provides-shadowsocks"><a href="#Provides-shadowsocks" class="headerlink" title="Provides:          shadowsocks"></a>Provides:          shadowsocks</h1><h1 id="Required-Start-remote-fs-syslog"><a href="#Required-Start-remote-fs-syslog" class="headerlink" title="Required-Start:    $remote_fs $syslog"></a>Required-Start:    $remote_fs $syslog</h1><h1 id="Required-Stop-remote-fs-syslog"><a href="#Required-Stop-remote-fs-syslog" class="headerlink" title="Required-Stop:     $remote_fs $syslog"></a>Required-Stop:     $remote_fs $syslog</h1><h1 id="Default-Start-2-3-4-5"><a href="#Default-Start-2-3-4-5" class="headerlink" title="Default-Start:     2 3 4 5"></a>Default-Start:     2 3 4 5</h1><h1 id="Default-Stop-0-1-6"><a href="#Default-Stop-0-1-6" class="headerlink" title="Default-Stop:      0 1 6"></a>Default-Stop:      0 1 6</h1><h1 id="Short-Description-start-shadowsocks"><a href="#Short-Description-start-shadowsocks" class="headerlink" title="Short-Description: start shadowsocks"></a>Short-Description: start shadowsocks</h1><h1 id="Description-start-shadowsocks"><a href="#Description-start-shadowsocks" class="headerlink" title="Description:       start shadowsocks"></a>Description:       start shadowsocks</h1><h3 id="END-INIT-INFO"><a href="#END-INIT-INFO" class="headerlink" title="END INIT INFO"></a>END INIT INFO</h3><p>ssstart(){<br>    /usr/local/bin/ssserver -c /etc/shadowsocks.json -d start<br>}<br>ssstop(){<br>    /usr/local/bin/ssserver-d stop<br>}<br>ssreload(){<br>    /usr/local/bin/ssserver -c /etc/shadowsocks.json -d restart<br>}<br>case “$1” in<br>start)<br>    ssstart<br>    ;;<br>stop)<br>    ssstop<br>    ;;<br>reload)<br>    ssreload<br>    ;;<br>*)<br>    echo “Usage: $0 {start|reload|stop}”<br>    exit 1<br>    ;;<br>esac</p>
-<p>增加文件的执行权限，并加入rc.d中，实现开机启动</p>
-<p>sudo chmod +x /etc/init.d/shadowsocks<br>sudo update-rc.d shadowsocks defaults</p>
-<p>手动开启shadowsocks服务</p>
-<p>sudo service shadowsocks start</p>
-<p>Step5: shadowsocks自动重连</p>
+<pre><code>#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          shadowsocks
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: start shadowsocks 
+# Description:       start shadowsocks
+### END INIT INFO
+ssstart(){
+    /usr/local/bin/ssserver -c /etc/shadowsocks.json -d start
+}
+ssstop(){
+    /usr/local/bin/ssserver-d stop
+}
+ssreload(){
+    /usr/local/bin/ssserver -c /etc/shadowsocks.json -d restart
+}
+case &quot;$1&quot; in
+start)
+    ssstart
+    ;;
+stop)
+    ssstop
+    ;;
+reload)
+    ssreload
+    ;;
+*)
+    echo &quot;Usage: $0 {start|reload|stop}&quot;
+    exit 1
+    ;;
+esac
+</code></pre><p>增加文件的执行权限，并加入rc.d中，实现开机启动</p>
+<pre><code>sudo chmod +x /etc/init.d/shadowsocks
+sudo update-rc.d shadowsocks defaults
+</code></pre><p>手动开启shadowsocks服务</p>
+<pre><code>sudo service shadowsocks start
+</code></pre><p>#Step5: shadowsocks自动重连</p>
 <p>创建autostart.sh</p>
-<p>#!/bin/bash<br>pids=”$($_CMD pgrep ssserver)”<br>if [ ! $pids ]; then<br>        /usr/local/bin/ssserver -c /etc/shadowsocks.json -d start &gt;&gt; /root/ss.log<br>        newid=”$($_CMD pgrep ssserver)”<br>        echo “Shadowsocks restarted at pid: $newid” &gt;&gt; /root/ss.log<br>fi<br>在crontab配置中，配置每天凌晨重启，以及每分钟检测断线重连</p>
-<p>crontab -e </p>
-<h1 id="选择-3-vim-basic"><a href="#选择-3-vim-basic" class="headerlink" title="选择[3]: vim.basic"></a>选择[3]: vim.basic</h1><h1 id="最后加入"><a href="#最后加入" class="headerlink" title="最后加入"></a>最后加入</h1><p>0 4 <em> </em> <em> ssserver -c /etc/shadowsocks.json -d restart &gt;&gt; /root/ss.log
-</em>/1 <em> </em> <em> </em> /root/autostart.sh<br>重启Crontab，使定时任务生效</p>
-<p>service cron reload</p>
-<p>大功告成！撒花！感谢酱哥的全程指导！</p>
+<pre><code>#!/bin/bash
+pids=&quot;$($_CMD pgrep ssserver)&quot;
+if [ ! $pids ]; then
+        /usr/local/bin/ssserver -c /etc/shadowsocks.json -d start &gt;&gt; /root/ss.log
+        newid=&quot;$($_CMD pgrep ssserver)&quot;
+        echo &quot;Shadowsocks restarted at pid: $newid&quot; &gt;&gt; /root/ss.log
+fi
+</code></pre><p>在crontab配置中，配置每天凌晨重启，以及每分钟检测断线重连</p>
+<pre><code>crontab -e 
+# 选择[3]: vim.basic
+# 最后加入
+0 4 * * * ssserver -c /etc/shadowsocks.json -d restart &gt;&gt; /root/ss.log
+*/1 * * * * /root/autostart.sh
+重启Crontab，使定时任务生效
+
+service cron reload
+</code></pre><p>大功告成！撒花！感谢酱哥的全程指导！</p>
 <p>泪流满面~小白入门太不容易啦！日后还要加油啊:)</p>
 
       
@@ -361,6 +433,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习体会/" rel="tag"># 学习体会</a>
+          
+        </div>
       
 
       
@@ -380,6 +458,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/09/scripts/AutoOpenEditor/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -431,17 +513,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -456,7 +529,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -469,7 +542,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -492,22 +565,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在-etc-sudoers-中添加root权限"><span class="nav-number">1.</span> <span class="nav-text">在 /etc/sudoers 中添加root权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#User-privilege-specification"><span class="nav-number">2.</span> <span class="nav-text">User privilege specification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BEGIN-INIT-INFO"><span class="nav-number">2.0.1.</span> <span class="nav-text">BEGIN INIT INFO</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Provides-shadowsocks"><span class="nav-number">3.</span> <span class="nav-text">Provides:          shadowsocks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Required-Start-remote-fs-syslog"><span class="nav-number">4.</span> <span class="nav-text">Required-Start:    $remote_fs $syslog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Required-Stop-remote-fs-syslog"><span class="nav-number">5.</span> <span class="nav-text">Required-Stop:     $remote_fs $syslog</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Default-Start-2-3-4-5"><span class="nav-number">6.</span> <span class="nav-text">Default-Start:     2 3 4 5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Default-Stop-0-1-6"><span class="nav-number">7.</span> <span class="nav-text">Default-Stop:      0 1 6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Short-Description-start-shadowsocks"><span class="nav-number">8.</span> <span class="nav-text">Short-Description: start shadowsocks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Description-start-shadowsocks"><span class="nav-number">9.</span> <span class="nav-text">Description:       start shadowsocks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#END-INIT-INFO"><span class="nav-number">9.0.1.</span> <span class="nav-text">END INIT INFO</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#选择-3-vim-basic"><span class="nav-number">10.</span> <span class="nav-text">选择[3]: vim.basic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后加入"><span class="nav-number">11.</span> <span class="nav-text">最后加入</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
