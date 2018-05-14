@@ -229,6 +229,315 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/14/markdown-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bo Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bryan Pan's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/14/markdown-notes/" itemprop="url">markdown_notes</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T09:12:34+08:00">
+                2018-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>还真是第一次接触markdown语言，作为第一次接触写博客的小白来说，md格式看起来还是比较人性化的，毕竟支持母语输出，哈哈哈！</p>
+<p>主要就是面对格式上一些内容需要了解，会不定期更新这些小知识点的！</p>
+<h1 id="PART1-标题格式"><a href="#PART1-标题格式" class="headerlink" title="PART1-标题格式"></a>PART1-标题格式</h1><p>说到标题就是一二三级啦！</p>
+<p>markdown是利用“#”来识别标题与正文的</p>
+<p>比如要实现下面的格式：</p>
+<p>标题：It’s a nice day!<br>正文：I play games all day.</p>
+<pre><code>实现方式：
+# It&apos;s a nice day!
+I play games all day.
+</code></pre><p>注意：“#”后面一定要空格！</p>
+<p>然后接下来就是不同级别标题，很理所当然就是用“#”的多少来表示啦~</p>
+<pre><code>实现方式：
+## AIN&apos;T NO MOUNTAIN HIGH ENOUGH
+### AIN&apos;T NO VALLEY LOW ENOUGH
+#### AIN&apos;T NO RIVER WIDE ENOUGH
+</code></pre><p>让我们来看看效果：</p>
+<h2 id="AIN’T-NO-MOUNTAIN-HIGH-ENOUGH"><a href="#AIN’T-NO-MOUNTAIN-HIGH-ENOUGH" class="headerlink" title="AIN’T NO MOUNTAIN HIGH ENOUGH"></a>AIN’T NO MOUNTAIN HIGH ENOUGH</h2><h3 id="AIN’T-NO-VALLEY-LOW-ENOUGH"><a href="#AIN’T-NO-VALLEY-LOW-ENOUGH" class="headerlink" title="AIN’T NO VALLEY LOW ENOUGH"></a>AIN’T NO VALLEY LOW ENOUGH</h3><h4 id="AIN’T-NO-RIVER-WIDE-ENOUGH"><a href="#AIN’T-NO-RIVER-WIDE-ENOUGH" class="headerlink" title="AIN’T NO RIVER WIDE ENOUGH"></a>AIN’T NO RIVER WIDE ENOUGH</h4><h1 id="PART2-有序无序列表"><a href="#PART2-有序无序列表" class="headerlink" title="PART2-有序无序列表"></a>PART2-有序无序列表</h1><p>说到列表，大家一定是最常用的了，不管是分类还是分段式阐释观点。</p>
+<p>让我们先看一下无序列表</p>
+<h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><ul>
+<li>litchi</li>
+<li>kiwi</li>
+<li>avocako</li>
+</ul>
+<p>正如上面效果一样，无序列表可以用“*”来实现。</p>
+<pre><code>* litchi
+* kiwi
+* avocako
+</code></pre><p>在每条tag前加*即可。</p>
+<p>同样的，我们也可以把*替换为+、-。</p>
+<h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><p>至于有序列表呢，就是更简单方便。</p>
+<ol>
+<li>get up </li>
+<li>wash up</li>
+<li>eat up</li>
+</ol>
+<p>如下方式：<br></p>
+<pre><code>1. get up 
+2. wash up
+3. eat up
+</code></pre><h1 id="PART3-字形"><a href="#PART3-字形" class="headerlink" title="PART3-字形"></a>PART3-字形</h1><p>字形的问题也简单操作，比如<em>斜体</em>、<strong>加粗</strong>！</p>
+<p>这里的处理就是运用*或者_都可以实现：</p>
+<pre><code>*斜体*
+__加粗__
+</code></pre><p>偶然发现变<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```黄</span><br></pre></td></tr></table></figure></p>
+<p>btw：引用的实现</p>
+<p>引用就是很方便的&gt;符号</p>
+<blockquote>
+<p>TO BE OR NOT TO BE, THAT IS A QUERTION.</p>
+</blockquote>
+<pre><code>&gt;TO BE OR NOT TO BE, THAT IS A QUERTION.
+</code></pre><h1 id="PART4-段落"><a href="#PART4-段落" class="headerlink" title="PART4-段落"></a>PART4-段落</h1><p>提到段落就是分段空隙了，在md中换行不是简简单单的一个return/enter而是要多空一行，强迫症需要适应啦。</p>
+<p>这里一提分割线：</p>
+<hr>
+<p>I WILL ALWAYS</p>
+<hr>
+<p>LOVE U</p>
+<hr>
+<p>实现：</p>
+<pre><code>---
+I WILL ALWAYS
+___
+LOVE U
+***
+</code></pre><h1 id="PART5-代码"><a href="#PART5-代码" class="headerlink" title="PART5-代码"></a>PART5-代码</h1><p>写博文自然少不了插入代码了，插入代码的方式还是我优秀的酱哥传授给我的，哈哈哈，特别感谢！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello world！</span><br></pre></td></tr></table></figure>
+<p>方式如下：</p>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hello world！</span><br></pre></td></tr></table></figure>
+</code></pre><p>今天就先更到这里了，多多学习，慢慢积累！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/set-up-my-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Bo Pan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Bryan Pan's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/12/set-up-my-blog/" itemprop="url">搭建博客</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-12T09:23:47+08:00">
+                2018-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>既然成为网络小白，第一步当然是搭建自己的博客。</p>
+<p>分割</p>
+<p>## </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/洛阳游记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -261,244 +570,6 @@
                 <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-09T10:51:29+08:00">
-                2018-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/markdown-notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bo Pan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bryan Pan's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/09/markdown-notes/" itemprop="url">markdown_notes</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-09T10:51:08+08:00">
-                2018-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/set-up-my-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Bo Pan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Bryan Pan's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/09/set-up-my-blog/" itemprop="url">搭建博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-09T09:23:47+08:00">
                 2018-05-09
               </time>
             
@@ -833,7 +904,7 @@ Universal Time is now: Fri May 7 07:19:57 UTC 2018.
       
         
           
-            <p>哈哈哈，折腾了三天，总算搭建起了这个博客，现在还是丑丑的，慢慢改进吧！<br>加油！</p>
+            <p>哈哈哈，折腾了三天，总算搭建起了这个博客，现在还是丑丑的，慢慢改进吧！<br>加油！筒子！</p>
 
           
         
