@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="既然成为网络小白，第一步当然是搭建自己的博客。 分割 ##">
+<meta name="description" content="既然成为网络小白，第一步当然是搭建自己的博客。">
 <meta name="keywords" content="学习体会">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搭建博客">
+<meta property="og:title" content="小白搭建博客">
 <meta property="og:url" content="http://yoursite.com/2018/05/12/set-up-my-blog/index.html">
 <meta property="og:site_name" content="Bryan Pan&#39;s blog">
-<meta property="og:description" content="既然成为网络小白，第一步当然是搭建自己的博客。 分割 ##">
+<meta property="og:description" content="既然成为网络小白，第一步当然是搭建自己的博客。">
 <meta property="og:locale" content="zh-hans">
-<meta property="og:updated_time" content="2018-05-12T00:28:30.552Z">
+<meta property="og:updated_time" content="2018-05-15T10:41:44.461Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="搭建博客">
-<meta name="twitter:description" content="既然成为网络小白，第一步当然是搭建自己的博客。 分割 ##">
+<meta name="twitter:title" content="小白搭建博客">
+<meta name="twitter:description" content="既然成为网络小白，第一步当然是搭建自己的博客。">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>搭建博客 | Bryan Pan's blog</title>
+  <title>小白搭建博客 | Bryan Pan's blog</title>
   
 
 
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">搭建博客</h1>
+          <h1 class="post-title" itemprop="name headline">小白搭建博客</h1>
         
 
         <div class="post-meta">
@@ -310,9 +310,33 @@
       
 
       
-        <p>既然成为网络小白，第一步当然是搭建自己的博客。</p>
-<p>分割</p>
-<p>## </p>
+        <p>既然成为网络小白，第一步当然是搭建自己的博客。<br><a id="more"></a></p>
+<p>好吧，老实说，是在看了Kevinzjy的blog，学习了我之前写的如何搭建Shadowsocks，然后觉得Blog真的是很方便啊，学习交流、写写见闻感受，尤其像我这种话痨的人，哈哈。</p>
+<p>切入正题 本文是个入门级科普文，帮助你简单搭建blog。</p>
+<p>在此特别感谢酱哥（Kevinzjy）的帮助以及学习了 Jason Li 的方法，附上原链接。<br><a href="https://lijxug.github.io/2017/05/13/howtostartablog/" target="_blank" rel="noopener">https://lijxug.github.io/2017/05/13/howtostartablog/</a></p>
+<h1 id="PART1-安装Git-amp-Node-js"><a href="#PART1-安装Git-amp-Node-js" class="headerlink" title="PART1-安装Git &amp; Node.js"></a>PART1-安装Git &amp; Node.js</h1><p>从git官方网站下载适合自己操作系统的git安装包打开安装。</p>
+<p>然后下载Node.js安装包进行安装。</p>
+<p>不用多说。</p>
+<h1 id="PART2-安装Hexo"><a href="#PART2-安装Hexo" class="headerlink" title="PART2-安装Hexo"></a>PART2-安装Hexo</h1><p>打开bash，或者git bash，利用以下命令安装hexo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<h1 id="PART3-Hexo初始化"><a href="#PART3-Hexo初始化" class="headerlink" title="PART3-Hexo初始化"></a>PART3-Hexo初始化</h1><p>选取一个文件夹作为blog根目录，在该路径下执行以下操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">npm install</span><br><span class="line">npm install hexo-deployer-git --save <span class="comment"># 安装git插件</span></span><br><span class="line">hexo clean</span><br><span class="line">hexo g <span class="comment"># == hexo generate 生成静态文件</span></span><br><span class="line">hexo d <span class="comment"># == hexo deploy 部署到远端（如github)</span></span><br><span class="line">hexo s <span class="comment"># == hexo server 启动本地web服务，用于预览</span></span><br></pre></td></tr></table></figure>
+<p>后期发现可以执行 <strong>hexo d -g</strong> 一步执行</p>
+<p>现在打开<a href="http://localhost:4000/应该就可以看到一个页面了。这就是你的blog在本地时候的样子。接下来我们要把它部署到网上。" target="_blank" rel="noopener">http://localhost:4000/应该就可以看到一个页面了。这就是你的blog在本地时候的样子。接下来我们要把它部署到网上。</a></p>
+<h1 id="PART4-获取github-page"><a href="#PART4-获取github-page" class="headerlink" title="PART4-获取github page"></a>PART4-获取github page</h1><p>前往github, 登录账号。</p>
+<p>点击new repository新建一个远程仓库,仓库名字必须是username/username.github.io</p>
+<p>然后将clone or download下形如<a href="https://github.com/your-username/your-username.github.io.git的git路径复制下来" target="_blank" rel="noopener">https://github.com/your-username/your-username.github.io.git的git路径复制下来</a></p>
+<p>填入hexo根目录下的_config.yml中deploy字段，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/your-username/your-username.github.io.git</span><br><span class="line">  brach: master</span><br></pre></td></tr></table></figure>
+<p>然后再次运行即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<h1 id="PART5-修改hexo主题"><a href="#PART5-修改hexo主题" class="headerlink" title="PART5-修改hexo主题"></a>PART5-修改hexo主题</h1><p>推荐使用主题NexT，集简洁和优雅于一体，而且使用方便。</p>
+<p>在bash下，切换到你之前选定的根目录文件夹，运行如下所示命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+<p>完成后，打开根目录下_config.yml文件，找到theme字段，将值改为next<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure></p>
+<p>之后重新产生静态页面并部署，就能看到主题改变。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure></p>
+<p>其他主题还有很多，如果想试试别的主题可以参考hexo themes list</p>
+<h1 id="PART6-其他个性化设置"><a href="#PART6-其他个性化设置" class="headerlink" title="PART6-其他个性化设置"></a>PART6-其他个性化设置</h1><p>可以再根目录下的_config.</p>
 
       
     </div>
@@ -387,7 +411,7 @@
   
     <div class="comments" id="comments">
       <div class="ds-thread" data-thread-key="2018/05/12/set-up-my-blog/"
-           data-title="搭建博客" data-url="http://yoursite.com/2018/05/12/set-up-my-blog/">
+           data-title="小白搭建博客" data-url="http://yoursite.com/2018/05/12/set-up-my-blog/">
       </div>
     </div>
 
@@ -414,8 +438,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -482,6 +515,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PART1-安装Git-amp-Node-js"><span class="nav-number">1.</span> <span class="nav-text">PART1-安装Git &amp; Node.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PART2-安装Hexo"><span class="nav-number">2.</span> <span class="nav-text">PART2-安装Hexo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PART3-Hexo初始化"><span class="nav-number">3.</span> <span class="nav-text">PART3-Hexo初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PART4-获取github-page"><span class="nav-number">4.</span> <span class="nav-text">PART4-获取github page</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PART5-修改hexo主题"><span class="nav-number">5.</span> <span class="nav-text">PART5-修改hexo主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PART6-其他个性化设置"><span class="nav-number">6.</span> <span class="nav-text">PART6-其他个性化设置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
